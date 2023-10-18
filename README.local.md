@@ -21,4 +21,4 @@ git config --add lfs.customtransfer.lfs-folder.args "/home/user/ftp"
 git config --add lfs.standalonetransferagent lfs-folder
 ```
 
-You can then test your setup by pusing LFS files.
+You can then test your setup by pushing LFS files.
