@@ -1,11 +1,11 @@
 # LFS with FTP V1
 
-This action get your LFS files from an FTP server.   
+This action allows you to download your LFS files from a FTP server.   
 It is using [lfs-folderstore](https://github.com/sinbad/lfs-folderstore) binary.
 
 # Setup LFS with FTP on your local machine
 
-To do so please read this [documentation](./README.local.md).
+Please read this [documentation](./README.local.md).
 
 # Usage
 
