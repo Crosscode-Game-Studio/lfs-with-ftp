@@ -32,7 +32,7 @@ runs:
       shell: bash
       run: |
         mkdir $HOME/lfs
-        pass=`rclone obscure ${{ inputs.ftp-password }}`
+        pass=`rclone obscure "${{ inputs.ftp-password }}"`
         echo "[remote]" > rclone_temp.conf
         echo "type = ftp" >> rclone_temp.conf
         echo "host = ${{ inputs.ftp-host }}" >> rclone_temp.conf
