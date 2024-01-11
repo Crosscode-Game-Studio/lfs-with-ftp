@@ -1,6 +1,6 @@
 ## Git with FTP for LFS
 
-Install rclone, git and git-lfs with : `sudo apt install curlftpfs git git-lfs -y`  
+Install rclone, git and git-lfs with : `sudo apt install rclone git git-lfs -y`  
 
 Then install [lfs-folderstore](https://github.com/sinbad/lfs-folderstore/releases) in `/home/user/bin` (do not forget to chmod +x).  
 
