@@ -1,6 +1,6 @@
 ## Git with FTP for LFS
 
-Install curlftpfs, git and git-lfs with : `sudo apt install curlftpfs git git-lfs -y`  
+Install rclone, git and git-lfs with : `sudo apt install curlftpfs git git-lfs -y`  
 
 Then install [lfs-folderstore](https://github.com/sinbad/lfs-folderstore/releases) in `/home/user/bin` (do not forget to chmod +x).  
 
@@ -8,7 +8,9 @@ Reboot your computer.
 
 Create a folder for your FTP mount : `mkdir /home/user/ftp`  
 
-Mount ftp in the folder : `curlftpfs -o user='user:pass' ftp://yourftpdomain.com/ /home/user/ftp -v`  
+Create a [rclone FTP config](https://rclone.org/ftp/) : `rclone config`
+
+Mount ftp in the folder : `rclone mount remote: /home/user/ftp &`  
 
 In your project you then have to do these commands :  
 
@@ -21,4 +23,9 @@ git config --add lfs.customtransfer.lfs-folder.args "/home/user/ftp"
 git config --add lfs.standalonetransferagent lfs-folder
 ```
 
-You can then test your setup by pushing LFS files.
+You can then test your setup by pushing/pulling LFS files.
+
+```sh
+git lfs push origin main
+git lfs pull
+```
