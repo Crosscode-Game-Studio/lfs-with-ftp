@@ -7,8 +7,8 @@ inputs:
   ftp-password:
     description: "Your FTP password"
     required: true
-  ftp-domain:
-    description: "Your FTP domain"
+  ftp-host:
+    description: "Your FTP host"
     required: true
   cache:
     description: "Enable caching for your LFS files"
@@ -22,17 +22,25 @@ runs:
       run: echo "${{ github.action_path }}/bin" >> $GITHUB_PATH
       shell: bash
         
-    - name: Install curlftpfs and libfuse2
-      shell: bash
-      run: |
-        sudo dpkg -i ${{ github.action_path }}/packages/libfuse2_2.9.9-5ubuntu3_amd64.deb
-        sudo dpkg -i ${{ github.action_path }}/packages/curlftpfs_0.9.2-9build1_amd64.deb
+    - name: Install rclone
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: rclone
+        version: 1.0
 
     - name: Mount folder
       shell: bash
       run: |
         mkdir $HOME/lfs
-        curlftpfs -o user='${{ inputs.ftp-user }}:${{ inputs.ftp-password }}' ftp://${{ inputs.ftp-domain }}/ $HOME/lfs -v
+        pass=`rclone obscure ${{ inputs.ftp-password }}`
+        echo "[remote]" > rclone_temp.conf
+        echo "type = ftp" >> rclone_temp.conf
+        echo "host = ${{ inputs.ftp-host }}" >> rclone_temp.conf
+        echo "user = ${{ inputs.ftp-user }}" >> rclone_temp.conf
+        echo "pass = ${pass}" >> rclone_temp.conf
+        echo "tls = false" >> rclone_temp.conf
+        echo "explicit_tls = false" >> rclone_temp.conf
+        rclone mount --config ./rclone_temp.conf remote: $HOME/lfs &
 
     - name: Config LFS provider
       shell: bash

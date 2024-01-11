@@ -16,7 +16,7 @@ Please read this [documentation](./README.local.md).
 
 - uses: crosscode-game-studio/lfs-with-ftp@v1
   with:
-    ftp-domain : ${{ secrets.FTP_DOMAIN }}
+    ftp-host : ${{ secrets.FTP_HOST }}
     ftp-user: ${{ secrets.FTP_USER }}
     ftp-password: ${{ secrets.FTP_PASS }}
 ```
@@ -33,7 +33,7 @@ LFS caching is enabled by default. To disable it you can do:
 
 - uses: crosscode-game-studio/lfs-with-ftp@v1
   with:
-    ftp-domain : ${{ secrets.FTP_DOMAIN }}
+    ftp-host : ${{ secrets.FTP_HOST }}
     ftp-user: ${{ secrets.FTP_USER }}
     ftp-password: ${{ secrets.FTP_PASS }}
     cache: false
